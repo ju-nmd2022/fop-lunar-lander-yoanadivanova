@@ -1,15 +1,18 @@
 let starX = [];
 let starY = [];
-let starSize = [];
+
+function planet(x, y) {
+  ellipse(starX, starY, 200);
+}
 
 for (let i = 0; i < 600; i++) {
   const x = Math.floor(Math.random() * width);
   const y = Math.floor(Math.random() * height);
-  const s = Math.random();
 
   starX.push(x);
   starY.push(y);
   starSize.push(s);
+  starSize2.push(s2);
 }
 
 function draw() {
@@ -17,7 +20,7 @@ function draw() {
   background(0, 0, 0);
 
   for (let index in starX) {
-    fill(255, 255, 255, Math.abs(Math.sin(starSize[index])));
-    ellipse(starX[index], starY[index], starSize);
+    fill(255, 255, 255);
+    planet(starX[index], starY[index], 200);
   }
 }
