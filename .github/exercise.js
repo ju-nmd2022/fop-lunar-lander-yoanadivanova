@@ -140,7 +140,7 @@ if(isGameActive){
 }
 }*/
 
-let spaceShipX = 50;
+/*let spaceShipX = 50;
 let spaceShipY = 50;
 let spaceShipWidth = 60;
 let spaceShipHeight = 30;
@@ -190,4 +190,34 @@ function draw() {
 
   ellipse(spaceShipX, spaceShipY, spaceShipWidth, spaceShipHeight);
   circle(planetX, planetY, planetRadius * 2);
+}*/
+
+let spaceShipY = 10;
+let spaceShipX = 360;
+let velocity = 0;
+let acceleration = 0.2;
+let isGameActive = true;
+let spaceShipRadius = 30;
+
+function spaceShip(x, y) {
+  push();
+  scale(1);
+  noStroke();
+  fill(255, 241, 100, 180);
+  ellipse(x, y, 60, 60);
+  pop();
 }
+
+let shipEllipseX = 360;
+let shipEllipseHeight = 30;
+let shipEllipseY = 25;
+let shipEllipseWidth = 90;
+
+function shipEllipse(x, y, width, height) {
+  push();
+  noStroke();
+  fill(230, 20, 200);
+  ellipse(x, y, width, height);
+  pop();
+}
+
