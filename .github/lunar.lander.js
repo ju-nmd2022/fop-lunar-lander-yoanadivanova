@@ -54,9 +54,18 @@ for (let i = 0; i < 4; i++) {
   planetBlue.push(b);
 }
 
+//alien
+function alien() {
+  let alien = createImg(
+    "https://www.freepnglogos.com/uploads/alien-png/alien-gesture-peace-victory-vector-graphic-pixabay-12.png"
+  );
+  alien.position(width / 2 - 25, height / 2 + 40);
+  alien.size(80, 140);
+}
+
 //space ship
 let spaceShipY = 10;
-let spaceShipX = 360;
+let spaceShipX = width / 2;
 let velocity = -1;
 let acceleration = 0.2;
 let isGameActive = true;
@@ -71,7 +80,7 @@ function spaceShip(x, y) {
   pop();
 }
 
-let shipEllipseX = 360;
+let shipEllipseX = width / 2;
 let shipEllipseHeight = 30;
 let shipEllipseY = 25;
 let shipEllipseWidth = 90;
@@ -85,9 +94,9 @@ function shipEllipse(x, y, width, height) {
 }
 
 function flames(x, y) {
-  let c1 = color(255, 255, 0); // yellow
-  let c2 = color(255, 0, 0); // red
-  let flameColor = lerpColor(c1, c2, random()); // random flame color between yellow and red
+  let c1 = color(255, 255, 0);
+  let c2 = color(255, 0, 0);
+  let flameColor = lerpColor(c1, c2, random());
   fill(flameColor);
   ellipse(x, y, 10, 15);
 }
@@ -104,7 +113,7 @@ function moveUp() {
     spaceShipY -= 2;
     shipEllipseY -= 2;
     velocity = 0;
-    flames(spaceShipX - 20, spaceShipY + 32);
+    flames(spaceShipX - 20, spaceShipY - 32);
     flames(spaceShipX + 20, spaceShipY + 32);
   }
 }
@@ -118,10 +127,6 @@ function shipMeetsTheMoon() {
 
 function stopCollision() {
   for (let i = 0; i < 4; i++) {
-    /*if(planetX[index] === spaceShipX && planetY[index] === spaceShipY) {
-  isGameActive = false;
-  return;
-} }*/
     let distance = dist(spaceShipX, spaceShipY, planetX[i], planetY[i]);
     size = planetSize[i] / 2;
     if (distance <= spaceShipRadius + planetSize[i] / 2) {
@@ -137,12 +142,12 @@ let hitPlanet = false;
 function drawStartButton() {
   // draw the button
   fill(255);
-  rect(width / 2 - 50, height / 2 - 20, 100, 40);
+  rect(width / 2 - 50, height / 2 - 50, 100, 40);
   // draw the text
   fill(0);
   textAlign(CENTER, CENTER);
   textSize(20);
-  text("Start", width / 2, height / 2);
+  text("Start", width / 2, height / 2 - 30);
 }
 
 function mousePressed() {
@@ -150,8 +155,8 @@ function mousePressed() {
     !isGameStarted &&
     mouseX > width / 2 - 50 &&
     mouseX < width / 2 + 50 &&
-    mouseY > height / 2 - 20 &&
-    mouseY < height / 2 + 20
+    mouseY > height / 2 - 50 &&
+    mouseY < height / 2 - 10
   ) {
     isGameStarted = true;
     spaceShipY = 10;
@@ -181,10 +186,11 @@ function startGame() {
 function winGame() {
   if (hitPlanet === false && velocity < 7 && velocity >= 0) {
     background(0, 255, 100);
+    alien();
     drawStartButton();
     fill(255, 255, 255);
     textSize(30);
-    text("You win", width / 2, height / 2 - 70);
+    text("You landed on the moon successfully ;)", width / 2, height / 2 - 100);
     textStyle(BOLD);
     isGameStarted = false;
   }
@@ -196,7 +202,7 @@ function loseGame() {
     drawStartButton();
     fill(255, 255, 255);
     textSize(30);
-    text("You lose", width / 2, height / 2 - 70);
+    text("Huston, we have a problem.", width / 2, height / 2 - 100);
     textStyle(BOLD);
     isGameStarted = false;
   }
