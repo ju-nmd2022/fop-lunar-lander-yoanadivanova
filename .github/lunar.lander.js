@@ -54,15 +54,6 @@ for (let i = 0; i < 4; i++) {
   planetBlue.push(b);
 }
 
-//alien
-function alien() {
-  let alien = createImg(
-    "https://www.freepnglogos.com/uploads/alien-png/alien-gesture-peace-victory-vector-graphic-pixabay-12.png"
-  );
-  alien.position(width / 2 - 25, height / 2 + 40);
-  alien.size(80, 140);
-}
-
 //space ship
 let spaceShipY = 10;
 let spaceShipX = width / 2;
@@ -113,7 +104,7 @@ function moveUp() {
     spaceShipY -= 2;
     shipEllipseY -= 2;
     velocity = 0;
-    flames(spaceShipX - 20, spaceShipY - 32);
+    flames(spaceShipX - 20, spaceShipY + 32);
     flames(spaceShipX + 20, spaceShipY + 32);
   }
 }
@@ -142,12 +133,12 @@ let hitPlanet = false;
 function drawStartButton() {
   // draw the button
   fill(255);
-  rect(width / 2 - 50, height / 2 - 50, 100, 40);
+  rect(width / 2 - 50, height / 2 - 20, 100, 40);
   // draw the text
   fill(0);
   textAlign(CENTER, CENTER);
   textSize(20);
-  text("Start", width / 2, height / 2 - 30);
+  text("Start", width / 2, height / 2);
 }
 
 function mousePressed() {
@@ -155,8 +146,8 @@ function mousePressed() {
     !isGameStarted &&
     mouseX > width / 2 - 50 &&
     mouseX < width / 2 + 50 &&
-    mouseY > height / 2 - 50 &&
-    mouseY < height / 2 - 10
+    mouseY > height / 2 - 20 &&
+    mouseY < height / 2 + 20
   ) {
     isGameStarted = true;
     spaceShipY = 10;
@@ -179,18 +170,17 @@ function startGame() {
     pop();
     fill(255, 255, 255);
     textSize(70);
-    text("Lunar Lander", width / 2, height / 2 - 110);
+    text("Lunar Lander", width / 2, height / 2 - 80);
   }
 }
 
 function winGame() {
   if (hitPlanet === false && velocity < 7 && velocity >= 0) {
     background(0, 255, 100);
-    alien();
     drawStartButton();
     fill(255, 255, 255);
     textSize(30);
-    text("You landed on the moon successfully ;)", width / 2, height / 2 - 100);
+    text("You landed on the moon successfully ;)", width / 2, height / 2 - 70);
     textStyle(BOLD);
     isGameStarted = false;
   }
@@ -202,7 +192,7 @@ function loseGame() {
     drawStartButton();
     fill(255, 255, 255);
     textSize(30);
-    text("Huston, we have a problem.", width / 2, height / 2 - 100);
+    text("Huston, we have a problem.", width / 2, height / 2 - 70);
     textStyle(BOLD);
     isGameStarted = false;
   }
