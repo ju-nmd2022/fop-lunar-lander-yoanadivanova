@@ -1,3 +1,16 @@
+width = 900;
+height = 600;
+
+function setup() {
+  createCanvas(900, 600);
+  frameRate(40);
+  noStroke();
+  background(0, 0, 0);
+  moonX = width / 2;
+  spaceShipX = width / 2;
+  shipEllipseX = width / 2;
+}
+
 //stars
 let starX = [];
 let starY = [];
@@ -199,8 +212,7 @@ function loseGame() {
 }
 
 function draw() {
-  noStroke();
-  background(0, 0, 0);
+  setup();
 
   if (!isGameStarted) {
     drawStartButton();
